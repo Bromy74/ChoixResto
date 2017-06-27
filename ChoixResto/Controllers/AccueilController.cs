@@ -51,7 +51,7 @@ public class AccueilController : Controller
     [HttpPost]
     [MultipleButton(Name = "action", Argument = "Access")]
     [ActionName("Index")]
-    public ActionResult IndexPostNew(int survey)
+    public ActionResult IndexPost(int survey)
     {
         return RedirectToAction("Index", "Vote", new { id = survey });
     }

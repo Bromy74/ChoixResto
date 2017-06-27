@@ -10,5 +10,6 @@ namespace ChoixResto.ViewModels
     {
         public Resto Resto { get; set; }
         public SelectList Sondages { get; set; }
+        public SelectList Restos { get; set; }
     }
 }

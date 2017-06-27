@@ -9,5 +9,5 @@ public class Booking
     public int Restochoisi { get; set; }
     public int Nbpeople { get; set; }
     public DateTime Date { get; set; }
-    public  Utilisateur Orga { get; set; }
+    public int Orga { get; set; }
 }

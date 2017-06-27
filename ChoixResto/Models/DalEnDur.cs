@@ -8,7 +8,7 @@ public class DalEnDur : IDal
     private List<Resto> listeDesRestaurants;
     private List<Utilisateur> listeDesUtilisateurs;
     private List<Sondage> listeDessondages;
-    private List<Booking> listeDesbookings;
+    private List<Booking> listeDesBookings;
 
     public DalEnDur()
     {
@@ -20,12 +20,22 @@ public class DalEnDur : IDal
         };
         listeDesUtilisateurs = new List<Utilisateur>();
         listeDessondages = new List<Sondage>();
-        listeDesbookings = new List<Booking>();
+        listeDesBookings = new List<Booking>();
     }
 
     public List<Resto> ObtientTousLesRestaurants()
     {
         return listeDesRestaurants;
+    }
+
+    public List<Booking> ObtientTousLesBookings()
+    {
+        return listeDesBookings;
+    }
+
+    public List<Utilisateur> ObtientTousLesUtilisateurs()
+    {
+        return listeDesUtilisateurs;
     }
 
     public void CreerRestaurant(string nom, string telephone)
@@ -130,10 +140,17 @@ public class DalEnDur : IDal
         listeDessondages = new List<Sondage>();
     }
 
-    public int CreerBooking(int Restochoisi, int Nbpeople, DateTime Date, Utilisateur Orga)
+    public int CreerBooking(int Restochoisi, int Nbpeople, DateTime Date, int Orga)
     {
-        int id = listeDesbookings.Count == 0 ? 1 : listeDesbookings.Max(s => s.Id) + 1;
-        listeDesbookings.Add(new Booking { Id = id, Restochoisi = Restochoisi, Nbpeople = Nbpeople, Date = Date,Orga=Orga });
+        int id = listeDesBookings.Count == 0 ? 1 : listeDesBookings.Max(s => s.Id) + 1;
+        listeDesBookings.Add(new Booking { Id = id, Restochoisi = Restochoisi, Nbpeople = Nbpeople, Date = Date, Orga = Orga });
         return id;
     }
+
+        public Resto RestoById(int id)
+    {
+        return listeDesRestaurants.FirstOrDefault(r => r.Id == id);
+    }
+
 }
+

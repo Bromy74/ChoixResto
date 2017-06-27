@@ -175,6 +175,7 @@
     <Content Include="Views\Accueil\Tuto3.cshtml" />
     <Content Include="Views\Shared\_LayoutPageNew.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Booking\All.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

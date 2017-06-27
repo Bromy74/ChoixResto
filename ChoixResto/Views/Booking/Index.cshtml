@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
     ViewBag.Title = "Index";
     ViewBag.GreenButton = "See all Booking";
+    ViewBag.GreenButtonLink = "/Booking/All";
     ViewBag.TitreSection = "Ready to book a restaurant ?";
 }
 
@@ -52,6 +53,8 @@
             </span>
         </span>
     </div>
+    
+    @*<p>@ViewBag.result</p>*@
 
     <div class="form-group col-md-6" style="padding-right : 0 ">
         @Html.Label("Date")
@@ -83,7 +86,7 @@
                     if (!isNaN(val))
                         $('#nbpeople').val($('#nbpeople').val() + val);
                     else
-                        $('#nbrpeople').val($('#nbpeople').val().substring(0, $('#nbpeople').val().length - 1));
+                        $('#nbpeople').val($('#nbpeople').val().substring(0, $('#nbpeople').val().length - 1));
 
                 });
 

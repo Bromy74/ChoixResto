@@ -1,0 +1,26 @@
+﻿@model ChoixResto.ViewModels.BookingViewModel
+        @{
+            ViewBag.Title = "All";
+            Layout = "~/Views/Shared/_Layout2.cshtml";
+        }
+
+    <table class="table table-bordered table-striped table-condensed">
+        <tr>
+            <th>Name</th>
+            <th>Number of people</th>
+            <th>Date</th>
+            <th>Organizer</th>
+        </tr>
+
+        @foreach (var booking in Model.ListeDesBookings)
+        {
+            <tr>
+                @*<td></td>*@
+                <td>@Model.ListeDesRestos.First(r=>r.Id == booking.Restochoisi).Nom</td>
+                <td>@booking.Nbpeople</td>
+                <td>@booking.Date.Date</td>
+                <td>@Model.ListeDesUtilisateurs.First(r => r.Id == booking.Orga).Prenom</td>
+
+            </tr>
+        }
+    </table>

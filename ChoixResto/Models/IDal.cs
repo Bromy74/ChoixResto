@@ -19,5 +19,9 @@ public interface IDal : IDisposable
     void AjouterVote(int idSondage, int idResto, int idUtilisateur);
     List<Resultats> ObtenirLesResultats(int idSondage);
     bool ADejaVote(int idSondage, string idStr);
-    int CreerBooking(int Restochoisi, int Nbpeople, DateTime Date, Utilisateur Orga);
+    int CreerBooking(int Restochoisi, int Nbpeople, DateTime Date, int Orga);
+    Resto RestoById(int id);
+    List<Booking> ObtientTousLesBookings();
+    List<Utilisateur> ObtientTousLesUtilisateurs();
+
 }

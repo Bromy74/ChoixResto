@@ -184,13 +184,33 @@ public class Dal : IDal
         return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
     }
 
-    public int CreerBooking(int Restochoisi,int Nbpeople,DateTime Date, Utilisateur Orga)
+    public int CreerBooking(int Restochoisi,int Nbpeople,DateTime Date, int Orga)
     {
         Booking booking = new Booking { Restochoisi = Restochoisi, Nbpeople = Nbpeople, Date = Date, Orga = Orga };
 
         bdd.Bookings.Add(booking);
         bdd.SaveChanges();
         return booking.Id;
+    }
+
+    public Resto RestoById(int id)
+    {
+        return bdd.Restos.First(r => r.Id == id);
+    }
+
+    public Utilisateur UserById(int id)
+    {
+        return bdd.Utilisateurs.First(r => r.Id == id);
+    }
+
+    public List<Booking> ObtientTousLesBookings()
+    {
+        return bdd.Bookings.ToList();
+    }
+
+    public List<Utilisateur> ObtientTousLesUtilisateurs()
+    {
+        return bdd.Utilisateurs.ToList();
     }
 }
 
