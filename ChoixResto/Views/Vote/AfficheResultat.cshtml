@@ -1,0 +1,19 @@
+﻿@model List<Resultats>
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Voir les resultats";
+}
+
+    <legend>Résultats du sondage :</legend>
+    <div id="tableauResultat">
+        @{
+            Html.RenderAction("AfficheTableau", new { id = ViewBag.Id });
+        }
+    </div>
+    @Ajax.ActionLink("Actualiser le résultat", "AfficheTableau", new { id = ViewBag.Id }, new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "tableauResultat",
+    HttpMethod = "GET"
+})
+    @*<p>Vue normale : @DateTime.Now.ToLongTimeString()</p>*@

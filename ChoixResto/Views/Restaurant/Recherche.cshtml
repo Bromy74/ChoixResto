@@ -1,0 +1,24 @@
+﻿@model RechercheViewModel
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Chercher un restaurant";
+}
+
+@using (Ajax.BeginForm("ResultatsRecherche", new AjaxOptions
+{
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "resultats",
+}))
+{
+    <div class="form-group form-inline">
+        @Html.TextBoxFor(m => m.Recherche, new { placeholder = "Recherche", style = "width:150px", @class = "form-control" })
+        <input class="btn btn-primary" type="submit" value="Rechercher" />
+        <p>Vue principale : @DateTime.Now.ToLongTimeString()</p>
+    </div>
+
+        <div id="resultats">
+            @{Html.RenderAction("ResultatsRecherche", new { rechercheViewModel = Model });
+            }
+        </div>
+    }

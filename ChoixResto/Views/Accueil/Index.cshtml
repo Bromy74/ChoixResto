@@ -1,0 +1,42 @@
+﻿@model ChoixResto.ViewModels.SondagesViewModel
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Index";
+    ViewBag.TitreSection = "Ready to choose a restaurant ?";
+}
+
+@using (Html.BeginForm())
+{
+    <legend class="h4">To access a new survey, click on the Button :</legend>
+    <div class="input-group">
+        @if (Model.Sondages.Count() == 0)
+        {
+            @Html.DropDownList("survey", Model.Sondages,"No survey available", new { @class = "form-control", @disabled = "disabled" })
+        }
+        else
+        {
+            @Html.DropDownList("survey", Model.Sondages, new { @class = "form-control" })
+        }
+        <span class="input-group-btn">
+            <input class="btn btn-primary" type="submit" value="Access a survey" name="action:Access" />
+        </span>
+    </div>
+    
+    <br />
+    <legend class="h4">To create a new survey, click on the Button :</legend>
+    <div class="input-group">
+        @*@Html.TextBoxFor(m => m.Sondages, "Enter the name of the survey", new { @class = "form-control" })*@
+        @Html.TextBox("newsurverylabel", "Enter the name of the survey", new { @class = "form-control" })
+
+        <span class="input-group-btn">
+            <input class="btn btn-primary" type="submit" value="Create a new survey" name="action:New" />
+        </span>
+    </div>
+    }
+    <br />
+    <legend class="h4">You can add or edit a restaurant on the list :</legend>
+    <ul class="list-group">
+        <li class="list-group-item">@Html.ActionLink("Add a restaurant", "CreerRestaurant", "Restaurant")</li>
+        <li class="list-group-item">@Html.ActionLink("Edit restaurants", "Index", "Restaurant")</li>
+    </ul>
+

@@ -1,0 +1,24 @@
+﻿@model Utilisateur
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Creer un compte";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Create an account :</legend>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Prenom)
+            @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Prenom)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MotDePasse)
+            @Html.PasswordFor(m => m.MotDePasse, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.MotDePasse)
+        </div>
+        <input class="btn btn-primary" type="submit" value="Créer" />
+    </fieldset>
+}
+

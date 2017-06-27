@@ -1,0 +1,29 @@
+﻿@model List<Resto>
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Index";
+}
+
+    <table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Modifier</th>
+    </tr>
+        
+    @foreach (var resto in Model)
+    {
+        <tr>
+            <td>@resto.Nom</td>
+            <td>@resto.Telephone</td>
+            <td>@Html.ActionLink("Modifier " + resto.Nom, "ModifierRestaurant", new { id = resto.Id })</td>
+        </tr>
+    }
+</table>
+
+
+
+@using (Html.BeginForm())
+{
+    <input class="btn btn-primary" type="submit" value="Add a Restaurant" />
+}

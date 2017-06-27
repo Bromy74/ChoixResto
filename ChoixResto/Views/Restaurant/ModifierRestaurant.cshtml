@@ -1,0 +1,52 @@
+﻿@model Resto
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Modifier un restaurant";
+}
+
+
+    @section css
+    {
+    <style type="text/css">
+
+        .field-validation-error {
+            color: #f00;
+        }
+
+        .validation-summary-errors {
+            color: #f00;
+            font-weight: bold;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        input[type="checkbox"].input-validation-error {
+            outline: 2px solid #f00;
+        }
+    </style>
+    }
+
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Edit a restaurant</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Nom)
+            @Html.TextBoxFor(model => Model.Nom, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Nom)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telephone)
+            @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Telephone)
+        </div>
+        <br />
+        <input class="btn btn-primary" type="submit" value="Modifier" />
+    </fieldset>
+} 

@@ -1,0 +1,25 @@
+﻿
+@model RechercheViewModel
+
+<p>Vue partielle : @DateTime.Now.ToLongTimeString()</p>
+<p class="h4">Result of the research :</p>
+@if (Model.ListeDesRestos.Count == 0)
+{
+    <p>No result</p>
+}
+else
+{
+    <table class="table table-bordered table-striped table-condensed">
+        <tr>
+            <th>Nom</th>
+            <th>Téléphone</th>
+        </tr>
+        @foreach (var resto in Model.ListeDesRestos)
+        {
+            <tr>
+                <td>@resto.Nom</td>
+                <td>@resto.Telephone</td>
+            </tr>
+        }
+    </table>
+}

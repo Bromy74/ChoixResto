@@ -1,0 +1,74 @@
+﻿@model Resto
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Creer un restaurant";
+}
+
+    @section scripts
+    {
+    <script type="text/javascript">
+    jQuery.validator.addMethod("verifcontact",
+    function (value, element, params) {
+        var tel = $("#" + params.parametre1).val();
+        var email = $("#" + params.parametre2).val();
+        return tel != '' || email != '';
+    });
+
+    jQuery.validator.unobtrusive.adapters.add
+        ("verifcontact", ["parametre1", "parametre2"], function (options) {
+            options.rules["verifcontact"] = options.params;
+            options.messages["verifcontact"] = options.message;
+        });
+    </script>
+    <style type="text/css">
+        .field-validation-error {
+            color: #f00;
+        }
+
+        .validation-summary-errors {
+            color: #f00;
+            font-weight: bold;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        input[type="checkbox"].input-validation-error {
+            outline: 2px solid #f00;
+        }
+    </style>
+    }
+
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Ajouter un restaurant</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nom)
+            @Html.TextBoxFor(model => model.Nom, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Nom)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telephone)
+            @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Telephone)
+            @*@Html.TextBoxFor(model => model.Telephone, new { data_val_verifcontact = "Vous devez saisir au moins un moyen de contacter le restaurant", data_val_verifcontact_parametre1 = "Telephone", data_val_verifcontact_parametre2 = "Email" })*@
+
+
+        </div>
+        @*<div>*@
+            @*@Html.LabelFor(model => model.Email)*@
+            @*@Html.TextBoxFor(model => model.Email)*@
+            @*@Html.TextBoxFor(model => model.Email, new { data_val = "true", data_val_verifcontact = "Vous devez saisir au moins un moyen de contacter le restaurant", data_val_verifcontact_parametre1 = "Telephone", data_val_verifcontact_parametre2 = "Email" })*@
+
+            @*@Html.ValidationMessageFor(model => model.Email)*@
+
+
+        @*</div>*@
+        <input class="btn btn-primary" type="submit" value="Ajouter" />
+    </fieldset>
+}

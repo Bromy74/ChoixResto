@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/supertuto.css" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    @RenderSection("scripts", required: false)
+    @RenderSection("css", required: false)
+
+
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header id="entete">
+            <h1>Bienvenue sur le site des Restos</h1>
+        </header>
+
+        <div id="main">
+            <nav id="menu">
+                <ul>
+                    <li>@Html.ActionLink("Accueil", "Index", "Accueil")</li>
+                    <li>@Html.ActionLink("Liste des Restaurants", "Index", "Restaurant")</li>
+                    <li>@Html.ActionLink("Connexion", "Index", "Login")</li>
+                </ul>
+            </nav>
+
+            <article id="contenu">
+                @RenderBody()
+                content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />
+                content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />
+content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />content<br />
+            </article>
+        </div>
+
+        <footer id="footer">
+            <p>&copy; @DateTime.Now.Year - Blablabla</p>
+        </footer>
+    </div>
+</body>
+</html>
+
