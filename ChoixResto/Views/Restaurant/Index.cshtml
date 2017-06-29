@@ -2,12 +2,16 @@
 @{
     Layout = "~/Views/Shared/_Layout2.cshtml";
     ViewBag.Title = "Index";
+    ViewBag.Size1 = "col-md-12";
+    ViewBag.Size2 = "col-md-0";
+
 }
 
     <table class="table table-bordered table-striped table-condensed">
     <tr>
         <th>Nom</th>
         <th>Téléphone</th>
+        <th>Place Disponible</th>
         <th>Modifier</th>
     </tr>
         
@@ -16,6 +20,7 @@
         <tr>
             <td>@resto.Nom</td>
             <td>@resto.Telephone</td>
+            <td>@resto.Size</td>
             <td>@Html.ActionLink("Modifier " + resto.Nom, "ModifierRestaurant", new { id = resto.Id })</td>
         </tr>
     }

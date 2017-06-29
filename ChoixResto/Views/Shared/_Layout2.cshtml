@@ -13,10 +13,13 @@
 
     }
     <link href="~/Content/CSS/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/CSS/bootstrap-datetimepicker.css" rel="stylesheet">
     <script type="text/javascript" src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/Scripts/moment.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js"></script>
     @RenderSection("scripts", required: false)
     @RenderSection("css", required: false)
     <style>
@@ -83,21 +86,28 @@
 
             <div class="col-md-9 well">
                 <div class="row">
-                        <div class="col-md-6">
-                            @RenderBody()
-                        </div>
-                        <div class="col-md-6">
+                         @*= "col-md-6";*@
+                    @{
+                        //ViewBag.Size1 = "col-md-6";
+                    }
+                    <div class=@(String.IsNullOrEmpty(ViewBag.Size1) ? "col-md-6" : ViewBag.Size1)>
+                        @RenderBody()
+                    </div>
+                    @{
+                        //ViewBag.Size2 = "col-md-6";
+                    }
+                    <div class= @(String.IsNullOrEmpty(ViewBag.Size2) ? "col-md-6" : ViewBag.Size2)>
                             <div class="text-right">
-                                    @if (String.IsNullOrEmpty(ViewBag.Title))
+                                    @if (String.IsNullOrEmpty(ViewBag.GreenButton))
                                     {
-                                        <a href="#" class="btn btn-success">Default Value</a>
+
                                     }
                                     else
                                     {
                                         <a href="@ViewBag.GreenButtonLink" class="btn btn-success">@ViewBag.GreenButton</a>
 
                                     }
-                                        
+
                             </div>
                         </div>
                     </div>

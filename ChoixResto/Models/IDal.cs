@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 public interface IDal : IDisposable
 {
-    void CreerRestaurant(string nom, string telephone);
-    void ModifierRestaurant(int id, string nom, string telephone);
+    void CreerRestaurant(string nom, string telephone, int size);
+    void ModifierRestaurant(int id, string nom, string telephone, int size);
     List<Resto> ObtientTousLesRestaurants();
     bool RestaurantExiste(string nom);
     int AjouterUtilisateur(string nom, string motDePasse);

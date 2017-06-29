@@ -23,9 +23,17 @@ public class LoginController : Controller
     public ActionResult Index()
     {
         UtilisateurViewModel viewModel = new UtilisateurViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+        if (HttpContext.User.Identity.IsAuthenticated & dal.ObtenirUtilisateur(HttpContext.User.Identity.Name) == null)
+        {
+            //return RedirectToAction("Index", "Accueil");
+            viewModel.Authentifie = false;
+            FormsAuthentication.SignOut();
+        }
         if (HttpContext.User.Identity.IsAuthenticated)
         {
             viewModel.Utilisateur = dal.ObtenirUtilisateur(HttpContext.User.Identity.Name);
+            //return RedirectToAction("Index", "Accueil");
+
         }
         return View(viewModel);
     }

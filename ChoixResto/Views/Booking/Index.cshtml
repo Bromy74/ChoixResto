@@ -8,15 +8,29 @@
     ViewBag.TitreSection = "Ready to book a restaurant ?";
 }
 
-@section css{
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@section scripts
+    {
+    <style type="text/css">
+        .field-validation-error {
+            color: #f00;
+        }
+
+        .validation-summary-errors {
+            color: #f00;
+            font-weight: bold;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        input[type="checkbox"].input-validation-error {
+            outline: 2px solid #f00;
+        }
+    </style>
 }
 
-@section scripts{
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-
-}
 
 @using (Html.BeginForm())
 {
@@ -28,7 +42,7 @@
     </div>
     <div class="form-group col-md-6" style="padding-left : 0 ">
         @Html.Label("Number of people")
-        @Html.TextBox("nbpeople", "", new { @class = "form-control" })
+        @Html.TextBox("nbpeople", "", new { @class = "form-control", @type = "number" })
         @*Mettre un readonly ??*@
 
         <span class="number " style="display:none;">
@@ -57,8 +71,12 @@
     @*<p>@ViewBag.result</p>*@
 
     <div class="form-group col-md-6" style="padding-right : 0 ">
-        @Html.Label("Date")
-        <input name="datepicker" type="text" class="form-control" id="datepicker">
+        @*@Html.Label("Date")*@
+        @Html.LabelFor(m=>m.booking.Date)
+        @*@Html.TextBox("Date","", new { @class = "form-control" })*@
+        @Html.TextBoxFor(m => m.booking.Date, new { @class = "form-control" })
+        @*<input name="Date" type="text" class="form-control" id="Date">*@
+        @*@Html.ValidationMessageFor(m=>m.booking.Date)*@
         @*@Html.TextBox("datepicker","",new { @class = "form-control hasDatepicker" }) pourquoi ca marche pas ??*@
     </div>
 
@@ -70,7 +88,7 @@
 
         <script>
             $(function () {
-                $("#datepicker").datepicker();
+                $("#Date").datetimepicker({ format: 'DD/MM/YYYY'});
 
                 $('#nbpeople').focus(function () {
                     $('.number').show();

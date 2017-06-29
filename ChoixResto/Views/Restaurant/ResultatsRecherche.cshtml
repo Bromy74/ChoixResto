@@ -13,12 +13,16 @@ else
         <tr>
             <th>Nom</th>
             <th>Téléphone</th>
+            <th>Place disponible</th>
+
         </tr>
         @foreach (var resto in Model.ListeDesRestos)
         {
             <tr>
                 <td>@resto.Nom</td>
                 <td>@resto.Telephone</td>
+                <td>@resto.Size</td>
+
             </tr>
         }
     </table>

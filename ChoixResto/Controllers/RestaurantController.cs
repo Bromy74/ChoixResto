@@ -46,7 +46,7 @@ public class RestaurantController : Controller
         }
         if (!ModelState.IsValid)
             return View(resto);
-        dal.CreerRestaurant(resto.Nom, resto.Telephone);
+        dal.CreerRestaurant(resto.Nom, resto.Telephone, resto.Size);
         return RedirectToAction("Index");
     }
 
@@ -68,7 +68,7 @@ public class RestaurantController : Controller
     {
         if (!ModelState.IsValid)
             return View(resto);
-        dal.ModifierRestaurant(resto.Id, resto.Nom, resto.Telephone);
+        dal.ModifierRestaurant(resto.Id, resto.Nom, resto.Telephone, resto.Size);
         return RedirectToAction("Index");
     }
 

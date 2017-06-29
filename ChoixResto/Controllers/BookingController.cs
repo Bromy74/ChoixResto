@@ -40,9 +40,18 @@ namespace ChoixResto.Controllers
             return View(vm);
         }
 
-        [HttpPost]
-        public ActionResult Index(int restochoisi, int nbpeople, DateTime datepicker, int orga)
 
+        //if (dal.RestaurantExiste(resto.Nom))
+        //{
+        //    ModelState.AddModelError("Nom", "Ce nom de restaurant existe déjà");
+        //    return View(resto);
+        //}
+        //if (!ModelState.IsValid)
+        //    return View(resto);
+
+        [HttpPost]
+        public ActionResult Index(Booking booking)
+            //int restochoisi, int nbpeople, DateTime start, int orga, 
         {
             var context = new BddContexte();
 
@@ -55,7 +64,11 @@ namespace ChoixResto.Controllers
 
             //ViewBag.result = restochoisi + " " + nbpeople + " " + datepicker + " " + orga;
             //dal.RestoById(restochoisi)
-            int id = dal.CreerBooking(restochoisi, nbpeople, datepicker, orga);
+            if (ModelState.IsValid)
+            {
+                int id = dal.CreerBooking(booking.Restochoisi, booking.Nbpeople, booking.Date, booking.Orga);
+                return View(vm);
+            }
             return View(vm);
         }
 

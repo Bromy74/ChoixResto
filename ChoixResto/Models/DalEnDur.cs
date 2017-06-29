@@ -38,19 +38,20 @@ public class DalEnDur : IDal
         return listeDesUtilisateurs;
     }
 
-    public void CreerRestaurant(string nom, string telephone)
+    public void CreerRestaurant(string nom, string telephone, int size)
     {
         int id = listeDesRestaurants.Count == 0 ? 1 : listeDesRestaurants.Max(r => r.Id) + 1;
-        listeDesRestaurants.Add(new Resto { Id = id, Nom = nom, Telephone = telephone });
+        listeDesRestaurants.Add(new Resto { Id = id, Nom = nom, Telephone = telephone, Size = size });
     }
 
-    public void ModifierRestaurant(int id, string nom, string telephone)
+    public void ModifierRestaurant(int id, string nom, string telephone, int size)
     {
         Resto resto = listeDesRestaurants.FirstOrDefault(r => r.Id == id);
         if (resto != null)
         {
             resto.Nom = nom;
             resto.Telephone = telephone;
+            resto.Size = size;
         }
     }
 
@@ -147,7 +148,7 @@ public class DalEnDur : IDal
         return id;
     }
 
-        public Resto RestoById(int id)
+    public Resto RestoById(int id)
     {
         return listeDesRestaurants.FirstOrDefault(r => r.Id == id);
     }

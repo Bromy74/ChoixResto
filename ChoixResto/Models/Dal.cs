@@ -20,19 +20,20 @@ public class Dal : IDal
         return bdd.Restos.ToList();
     }
 
-    public void CreerRestaurant(string nom, string telephone)
+    public void CreerRestaurant(string nom, string telephone, int size)
     {
-        bdd.Restos.Add(new Resto { Nom = nom, Telephone = telephone });
+        bdd.Restos.Add(new Resto { Nom = nom, Telephone = telephone, Size = size });
         bdd.SaveChanges();
     }
 
-    public void ModifierRestaurant(int id, string nom, string telephone)
+    public void ModifierRestaurant(int id, string nom, string telephone, int size)
     {
         Resto restoTrouve = bdd.Restos.FirstOrDefault(resto => resto.Id == id);
         if (restoTrouve != null)
         {
             restoTrouve.Nom = nom;
             restoTrouve.Telephone = telephone;
+            restoTrouve.Size = size;
             bdd.SaveChanges();
         }
     }
@@ -184,7 +185,7 @@ public class Dal : IDal
         return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
     }
 
-    public int CreerBooking(int Restochoisi,int Nbpeople,DateTime Date, int Orga)
+    public int CreerBooking(int Restochoisi, int Nbpeople, DateTime Date, int Orga)
     {
         Booking booking = new Booking { Restochoisi = Restochoisi, Nbpeople = Nbpeople, Date = Date, Orga = Orga };
 

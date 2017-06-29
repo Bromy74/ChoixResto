@@ -17,6 +17,8 @@ public class Resto
     [Display(Name = "Téléphone")]
     [RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Le numéro de téléphone est incorrect")]
     public string Telephone { get; set; }
+    [Range(0, 9999)]
+    public int Size { get; set; }
 }
 
 //public class Resto : IValidatableObject

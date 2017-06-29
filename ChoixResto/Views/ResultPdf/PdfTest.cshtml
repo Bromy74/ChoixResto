@@ -1,0 +1,10 @@
+﻿@model IEnumerable<int>
+
+<pdf xmlns="Aspose.Pdf" destinationtype="FitPage">
+    <section>
+        @foreach (int c in Model)
+        {
+            @:<text alignment="Center"><segment>@c</segment></text>
+        }
+    </section>
+</pdf>
