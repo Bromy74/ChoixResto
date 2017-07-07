@@ -32,6 +32,11 @@ public class DalEnDur : IDal
     {
         return listeDesBookings;
     }
+    public List<Booking> ObtientTousLesBookings(int idresto, DateTime date)
+    {
+        //changement a faire ici
+        return listeDesBookings;
+    }
 
     public List<Utilisateur> ObtientTousLesUtilisateurs()
     {
@@ -77,6 +82,11 @@ public class DalEnDur : IDal
         return listeDesUtilisateurs.FirstOrDefault(u => u.Id == id);
     }
 
+    public Booking GetBooking(int id)
+    {
+        return listeDesBookings.FirstOrDefault(u => u.Id == id);
+    }
+
     public Utilisateur ObtenirUtilisateur(string idStr)
     {
         int id;
@@ -84,6 +94,7 @@ public class DalEnDur : IDal
             return ObtenirUtilisateur(id);
         return null;
     }
+
 
     public int CreerUnSondage()
     {
@@ -148,7 +159,7 @@ public class DalEnDur : IDal
         return id;
     }
 
-    public Resto RestoById(int id)
+    public Resto GetResto(int id)
     {
         return listeDesRestaurants.FirstOrDefault(r => r.Id == id);
     }

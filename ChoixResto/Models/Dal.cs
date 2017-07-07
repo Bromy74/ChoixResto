@@ -194,7 +194,7 @@ public class Dal : IDal
         return booking.Id;
     }
 
-    public Resto RestoById(int id)
+    public Resto GetResto(int id)
     {
         return bdd.Restos.First(r => r.Id == id);
     }
@@ -204,14 +204,40 @@ public class Dal : IDal
         return bdd.Utilisateurs.First(r => r.Id == id);
     }
 
+    public Booking GetBooking(int id)
+    {
+        return bdd.Bookings.First(r => r.Id == id);
+    }
+    
     public List<Booking> ObtientTousLesBookings()
     {
-        return bdd.Bookings.ToList();
+        if (bdd.Bookings.Any())
+            return bdd.Bookings.ToList();
+        else return null;
+    }
+
+    public List<Booking> ObtientTousLesBookings(int idresto, DateTime date)
+    {
+        List<Booking> bookingsIntermediaire = new List<Booking>();
+        List<Booking> bookings = new List<Booking>();
+        foreach(var b in bdd.Bookings.ToList())
+        {
+            if (b.Restochoisi==idresto)
+                bookingsIntermediaire.Add(b);
+        }
+        foreach(var b in bookingsIntermediaire)
+        {
+            if (b.Date.Date == date.Date)
+                bookings.Add(b);
+        }
+        return bookings;
+
     }
 
     public List<Utilisateur> ObtientTousLesUtilisateurs()
     {
         return bdd.Utilisateurs.ToList();
     }
+
 }
 

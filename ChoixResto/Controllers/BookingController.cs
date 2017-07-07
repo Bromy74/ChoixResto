@@ -26,6 +26,20 @@ namespace ChoixResto.Controllers
         // GET: Booking
 
 
+        public void ValidateCapacity(BookingViewModel vm)
+        {
+            var restaurant = dal.GetResto(vm.booking.Restochoisi);
+            var existingBookings = dal.ObtientTousLesBookings(vm.booking.Restochoisi, vm.booking.Date);
+            var available = restaurant.Size - existingBookings.Sum(b => b.Nbpeople);
+            if (vm.booking.Nbpeople > available)
+            {
+                if (available == 0)
+                    ModelState.AddModelError("Nbpeople", "There are no more places available for this day.");
+                else 
+                    ModelState.AddModelError("Nbpeople", "There are only "+available+" places available for this day");
+            }
+        }
+
         public ActionResult Index()
         {
             var context = new BddContexte();
@@ -50,23 +64,26 @@ namespace ChoixResto.Controllers
         //    return View(resto);
 
         [HttpPost]
-        public ActionResult Index(Booking booking)
+        public ActionResult Index(BookingViewModel vm)
             //int restochoisi, int nbpeople, DateTime start, int orga, 
         {
             var context = new BddContexte();
+            vm.Restos = new SelectList(context.Restos.AsEnumerable(), "Id", "Nom");
+            vm.Utilisateurs = new SelectList(context.Utilisateurs.AsEnumerable(), "Id", "Prenom");
 
-            var vm = new BookingViewModel()
-            {
-                Restos = new SelectList(context.Restos.AsEnumerable(), "Id", "Nom"),
-                Utilisateurs = new SelectList(context.Utilisateurs.AsEnumerable(), "Id", "Prenom")
+            //var vm = new BookingViewModel()
+            //{
+            //    Restos = new SelectList(context.Restos.AsEnumerable(), "Id", "Nom"),
+            //    Utilisateurs = new SelectList(context.Utilisateurs.AsEnumerable(), "Id", "Prenom")
 
-            };
+            //};
 
             //ViewBag.result = restochoisi + " " + nbpeople + " " + datepicker + " " + orga;
             //dal.RestoById(restochoisi)
+            ValidateCapacity(vm);
             if (ModelState.IsValid)
             {
-                int id = dal.CreerBooking(booking.Restochoisi, booking.Nbpeople, booking.Date, booking.Orga);
+                int id = dal.CreerBooking(vm.booking.Restochoisi, vm.booking.Nbpeople, vm.booking.Date, vm.booking.Orga);
                 return View(vm);
             }
             return View(vm);

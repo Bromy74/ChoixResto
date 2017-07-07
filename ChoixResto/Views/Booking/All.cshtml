@@ -18,7 +18,7 @@
         {
             <tr>
                 @*<td></td>*@
-                <td>@Model.ListeDesRestos.First(r=>r.Id == booking.Restochoisi).Nom</td>
+                <td>@Model.ListeDesRestos.Single(r=>r.Id == booking.Restochoisi).Nom</td>
                 <td>@booking.Nbpeople</td>
                 <td>@booking.Date.Date</td>
                 <td>@Model.ListeDesUtilisateurs.First(r => r.Id == booking.Orga).Prenom</td>

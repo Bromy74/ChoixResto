@@ -14,14 +14,17 @@ public interface IDal : IDisposable
     Utilisateur Authentifier(string nom, string motDePasse);
     Utilisateur ObtenirUtilisateur(int id);
     Utilisateur ObtenirUtilisateur(string idStr);
+    Booking GetBooking(int id);
     int CreerUnSondage();
     int CreerUnSondage(string label);
     void AjouterVote(int idSondage, int idResto, int idUtilisateur);
     List<Resultats> ObtenirLesResultats(int idSondage);
     bool ADejaVote(int idSondage, string idStr);
     int CreerBooking(int Restochoisi, int Nbpeople, DateTime Date, int Orga);
-    Resto RestoById(int id);
+    Resto GetResto(int id);
     List<Booking> ObtientTousLesBookings();
+    List<Booking> ObtientTousLesBookings(int idresto, DateTime date);
     List<Utilisateur> ObtientTousLesUtilisateurs();
+
 
 }

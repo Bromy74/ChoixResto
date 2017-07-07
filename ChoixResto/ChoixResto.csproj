@@ -136,6 +136,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BddContexte.cs" />
     <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\CustomPlaceValidatorcs.cs" />
     <Compile Include="Models\CustomValidator.cs" />
     <Compile Include="Models\Dal.cs" />
     <Compile Include="Models\DalEnDur.cs" />

@@ -8,7 +8,7 @@
     ViewBag.TitreSection = "Ready to book a restaurant ?";
 }
 
-@section scripts
+@section css
     {
     <style type="text/css">
         .field-validation-error {
@@ -31,18 +31,57 @@
     </style>
 }
 
+@*@section scripts{
+    <script>
+        jQuery.validator.addMethod("currentdate", function (value, element) {
+            return Date.parse(value) > Date.parse(new Date());
+        }, jQuery.validator.format("Date is not in given range"));
+    </script>
+    
+
+}*@
+@section scripts{
+    <script>
+
+        jQuery.validator.addMethod("datemustbeequalorgreaterthancurrentdate", function (value, element, param) {
+            var dateinput = Date.parse(moment());
+            var dateinput2 = Date.parse(new Date());
+            var datetoday = Date.parse(value);
+            var datetoday2 = moment(value, "DD/MM/YYYY, h/mm a");
+            //var mois = date.getMonth();
+            //var annee = date.getFullYear();
+            //var datebis = "0"+jour + "/" + "0"+mois + "/" + annee;
+            //alert(dateinput - datetoday);
+            //alert(dateinput2 - datetoday2);
+            //var bool = (datetoday > dateinput);
+            //alert(datetoday);
+            return (datetoday2>dateinput);
+        });
+
+        jQuery.validator.unobtrusive.adapters.addBool("datemustbeequalorgreaterthancurrentdate");
+
+    </script>
+}
+
 
 @using (Html.BeginForm())
 {
     <legend id="test">Book a restaurant</legend>
 
     <div class="form-group">
-        @Html.Label("Choose the restaurant")
-        @Html.DropDownList("restochoisi", Model.Restos, new { @class = "form-control" })
+        @*@Html.Label("Choose the restaurant")*@
+        @Html.LabelFor(m=>m.booking.Restochoisi)
+        @*@Html.DropDownList("restochoisi", Model.Restos, new { @class = "form-control" })*@
+        @Html.DropDownListFor(m=>m.booking.Restochoisi, Model.Restos, new { @class = "form-control" })
+
+
     </div>
     <div class="form-group col-md-6" style="padding-left : 0 ">
-        @Html.Label("Number of people")
-        @Html.TextBox("nbpeople", "", new { @class = "form-control", @type = "number" })
+        @*@Html.Label("Number of people")*@
+        @Html.LabelFor(m=>m.booking.Nbpeople)
+        @*@Html.TextBox("nbpeople", "", new { @class = "form-control", @type = "number" })*@
+        @Html.TextBoxFor(m => m.booking.Nbpeople, new { @class="form-control"})
+        @Html.ValidationMessage("Nbpeople")
         @*Mettre un readonly ??*@
 
         <span class="number " style="display:none;">
@@ -74,39 +113,43 @@
         @*@Html.Label("Date")*@
         @Html.LabelFor(m=>m.booking.Date)
         @*@Html.TextBox("Date","", new { @class = "form-control" })*@
-        @Html.TextBoxFor(m => m.booking.Date, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.booking.Date, new { @class = "form-control", @id = "Date", @data_val_datemustbeequalorgreaterthancurrentdate = "The date must be later than the current date." })
         @*<input name="Date" type="text" class="form-control" id="Date">*@
-        @*@Html.ValidationMessageFor(m=>m.booking.Date)*@
+        @Html.ValidationMessageFor(m=>m.booking.Date)
         @*@Html.TextBox("datepicker","",new { @class = "form-control hasDatepicker" }) pourquoi ca marche pas ??*@
     </div>
 
     <div class="form-group">
-        @Html.Label("Name of organisateur") @*Probleme label qui se barre sur la droite quand le pave numerique apparait*@
-        @Html.DropDownList("orga", Model.Utilisateurs, new { @class = "form-control" })
+        @*@Html.Label("Name of organisateur") Probleme label qui se barre sur la droite quand le pave numerique apparait*@
+        @Html.LabelFor(m=>m.booking.Orga)
+        @*@Html.DropDownList("orga", Model.Utilisateurs, new { @class = "form-control" })*@
+        @Html.DropDownListFor(m=>m.booking.Orga, Model.Utilisateurs, new { @class = "form-control" })
+
+
     </div>
     <input class="btn btn-primary" type="submit" value="Send" />
 
         <script>
             $(function () {
-                $("#Date").datetimepicker({ format: 'DD/MM/YYYY'});
+                $("#Date").datetimepicker({ format: 'DD/MM/YYYY, h:mm a' });
 
-                $('#nbpeople').focus(function () {
-                    $('.number').show();
-                });
-                $('input:not("#nbpeople")').focus(function () {
-                    $('.number').hide();
-                });
-                //$('#numberpeople').blur(function () {
+                //$('#nbpeople').focus(function () {
+                //    $('.number').show();
+                //});
+                //$('input:not("#nbpeople")').focus(function () {
                 //    $('.number').hide();
                 //});
-                $('.chiffre').click(function () {
-                    var val = $(this).text();
-                    if (!isNaN(val))
-                        $('#nbpeople').val($('#nbpeople').val() + val);
-                    else
-                        $('#nbpeople').val($('#nbpeople').val().substring(0, $('#nbpeople').val().length - 1));
+                ////$('#numberpeople').blur(function () {
+                ////    $('.number').hide();
+                ////});
+                //$('.chiffre').click(function () {
+                //    var val = $(this).text();
+                //    if (!isNaN(val))
+                //        $('#nbpeople').val($('#nbpeople').val() + val);
+                //    else
+                //        $('#nbpeople').val($('#nbpeople').val().substring(0, $('#nbpeople').val().length - 1));
 
-                });
+                //});
 
 
             });
